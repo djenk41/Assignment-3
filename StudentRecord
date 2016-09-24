@@ -7,17 +7,16 @@ public class StudentRecord{
         private double testsAverage;
         private char Grade;
         
-        public StudentRecord(String Name, double Scores1, double Scores2, double Scores3, double Scores4, double Scores5 ){
+        public StudentRecord(String Name, double Scores1, double Scores2, double Scores3, double Scores4){
             //Filling the variables
             studentName = Name;
             testScores[0] = Scores1;
             testScores[1] = Scores2;
             testScores[2] = Scores3;
             testScores[3] = Scores4;
-            testScores[4] = Scores5;
             //computes the average of the test scores and stores it
             testsAverage = (testScores[0] + testScores[1] + testScores[2] +
-                    testScores[3] + testScores[4]) / 5;
+                    testScores[3]) / 4;
             //If/Then used to get the letter grade from the average
             if (testsAverage >= 90){
             Grade = 'A';
@@ -51,7 +50,7 @@ public class StudentRecord{
         //Used this during troubleshooting to display all the stored info at once
         public void printall(){
             System.out.println(studentName);
-            System.out.println(testScores[0] + " " + testScores[1] + " " +  testScores[2] + " " +  testScores[3] + " " +  testScores[4]);
+            System.out.println(testScores[0] + " " + testScores[1] + " " +  testScores[2] + " " +  testScores[3]);
             System.out.println(testsAverage);
             System.out.println(Grade);
         }
