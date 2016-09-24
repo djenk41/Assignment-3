@@ -1,0 +1,47 @@
+package project.pkg3;
+
+import java.util.*;
+
+public class Project3 {
+
+    
+    public static void main(String[] args) {
+        int menu = 6;
+        GradeBook gb = new GradeBook();
+        Scanner input = new Scanner(System.in);
+         //Sets up a menu that allows the user to make multiple selections       
+        do{
+        System.out.println("################################################");
+        System.out.println("# 1. Enter New Student Record                ###");
+        System.out.println("# 2. Print Student Record                    ###");
+        System.out.println("# 3. Display all Students names              ###");
+        System.out.println("# 4. Delete a student record                 ###");
+        System.out.println("# 5. Exit                                    ###");
+        System.out.println("# Please enter the number of your selection  ###");
+        System.out.println("################################################");
+        try{
+            menu = input.nextInt();
+            switch(menu){
+                case 1  :   gb.newRecord();
+                            break;
+                case 2  :   gb.printRecord();
+                            break;
+                case 3  :   gb.DisplayAllStudents();
+                            break;
+                case 4  :   gb.RemoveStudent();                        ////System.exit(0);
+                            break;
+                case 5  :   System.out.println("Exiting the program.");
+                            System.exit(0);
+                default :   System.out.println("Invalid Selection");
+                            break;
+        }
+        }catch(Exception e){//Catchs InputMistmatchException errors
+            System.out.println("Invalid Selection");
+            input.nextLine();
+            System.out.println();
+        }
+        }while(menu != 5);
+        
+    }
+       
+}
