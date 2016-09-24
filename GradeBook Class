@@ -1,0 +1,115 @@
+package project.pkg3;
+
+
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+
+
+public class GradeBook{
+    // Initializing all the variables uses to store a full student record
+    private double[] tests = new double[5];
+    private String name;
+    private int count = 0;
+    private boolean isCorrect = false;
+    private ArrayList<StudentRecord> records = new ArrayList<StudentRecord>();
+    private Scanner input;
+    DecimalFormat df = new DecimalFormat("##.##");
+
+    public void newRecord(){
+        //Create a new scanner to make sure no input is left over from the last record created
+        input = new Scanner(System.in);
+        System.out.print("Please enter the student's name: ");
+        name = input.nextLine();
+        System.out.print("Enter the 5 test scores: ");
+        count = 0;
+        //Attempt to full the tests array with the 5 scores
+        do{
+            try{
+                tests[count] = input.nextDouble();
+                if(tests[count] > 100 || tests[count] < 0){
+                    throw new OutOfBoundsException();  //If a number greater than 100 or less than 0 is used
+                }                                      // it will throw an exception and prevent the counter from incrementing
+                count++;  
+            }catch(Exception e){//Catches OutOfBoundsException and InputNumberMismatchException
+                System.out.println("Please only use numbers between 0-100 for the tests");
+                input.nextLine();
+                System.out.println("Please re enter the 5 test scores");
+            }
+        }while (count <= 4);
+        //Adds the new StudentRecord object to the records arraylist
+        records.add(new StudentRecord(name, tests[0], tests[1], tests[2], tests[3], tests[4]));
+    }
+    //Allows the printing of a record by Student Name
+    public void printRecord(){
+        boolean isFound = false;
+        input = new Scanner(System.in);//created a new scanner to prevent input from a previous one
+        System.out.println("This will print out a student's record.");
+        System.out.print("Enter the name of the student: ");
+        name = input.nextLine();
+        count = 0;
+        //Searches the arraylist for a StudentRecord that matches the input name
+        while(records.size() > count){
+            if(records.get(count).getName().toLowerCase().equals(name.toLowerCase())){
+                isFound = true;
+                break;//If the correct name is found this exits the loop and saves the count to be used as an index
+            }
+            count++;
+        }
+        //If a records matching the student name was found it prints it.
+        //Otherwise it notifies the use that a record wasn't found.
+        if(isFound){
+            tests = records.get(count).getScores();
+            System.out.println("Name: " + records.get(count).getName());
+            System.out.println("Test1: " + df.format(records.get(count).getScores()[0]) + "\tTest2: " + df.format(records.get(count).getScores()[1]) + 
+                    "\tTest3: " + df.format(records.get(count).getScores()[2]) + "\tTest4: " + df.format(records.get(count).getScores()[3])
+                    + "\tTest5: " + df.format(records.get(count).getScores()[4]));
+            System.out.println("Average: " + df.format(records.get(count).getAverage())+ "%");
+            System.out.println("Grade: " + records.get(count).getGrade());
+            System.out.println("\n\n\n\n\n\n\n\n\n\n\n");
+            System.out.println("Press enter to continue");
+            input.nextLine();
+        }else{
+            System.out.println(name + " not found in records.\n\n");
+        }
+    }
+    // Used to display just the names of all the students entered
+    public void DisplayAllStudents(){
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+        for (int i = 0; i < records.size(); i++){
+            System.out.println((i+1) + ": " + records.get(i).getName());
+    }    input.nextLine();
+    }
+    public void RemoveStudent(){
+        boolean isFound = false;
+        input = new Scanner(System.in);//created a new scanner to prevent input from a previous one
+        System.out.println("This will delete out a student's record.");
+        System.out.print("Enter the name of the student: ");
+        name = input.nextLine();
+        count = 0;
+        //Searches the arraylist for a StudentRecord that matches the input name
+        while(records.size() > count){
+            if(records.get(count).getName().toLowerCase().equals(name.toLowerCase())){
+                isFound = true;
+                break;//If the correct name is found this exits the loop and saves the count to be used as an index
+            }
+            count++;
+        }
+        //If a records matching the student name was found it deletes it.
+        //Otherwise it notifies the use that a record wasn't found.
+        if(isFound){
+            records.remove(count);
+            System.out.println("Student " + name + "'s record has been deleted");
+            System.out.println("\n\n\n\n\n\n\n\n\n\n\n");
+            System.out.println("Press enter to continue");
+            input.nextLine();
+        }else{
+            System.out.println(name + " not found in records.\n\n");
+        }
+    }
+    public class OutOfBoundsException extends Exception{ //allows a OutOfBoundsException to be thrown
+        public OutOfBoundsException(){                   // Used when input for tests is outside of the 0-100 range
+        }
+}
+}
