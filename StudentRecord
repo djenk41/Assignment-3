@@ -1,0 +1,58 @@
+package project.pkg3;
+
+public class StudentRecord{
+        //Creates the variables that will be used to store the student information
+        private String studentName;
+        private double[] testScores = new double[5];
+        private double testsAverage;
+        private char Grade;
+        
+        public StudentRecord(String Name, double Scores1, double Scores2, double Scores3, double Scores4, double Scores5 ){
+            //Filling the variables
+            studentName = Name;
+            testScores[0] = Scores1;
+            testScores[1] = Scores2;
+            testScores[2] = Scores3;
+            testScores[3] = Scores4;
+            testScores[4] = Scores5;
+            //computes the average of the test scores and stores it
+            testsAverage = (testScores[0] + testScores[1] + testScores[2] +
+                    testScores[3] + testScores[4]) / 5;
+            //If/Then used to get the letter grade from the average
+            if (testsAverage >= 90){
+            Grade = 'A';
+            }else if (testsAverage >= 80){
+                Grade = 'B';
+            }else if(testsAverage >= 70){
+                Grade = 'C';
+            }else if(testsAverage >= 60){
+                Grade = 'D';
+                    
+            }else{
+                Grade = 'F';
+            }
+        }
+        //Used to get the Studentname
+        public String getName(){
+            return studentName;
+        }
+        //Used to get the test scores
+        public double[] getScores(){
+            return testScores;
+        }
+        //Used to get the average
+        public double getAverage(){
+            return testsAverage;
+        }
+        //used to get the Letter Grade
+        public char getGrade(){
+            return Grade;
+        }
+        //Used this during troubleshooting to display all the stored info at once
+        public void printall(){
+            System.out.println(studentName);
+            System.out.println(testScores[0] + " " + testScores[1] + " " +  testScores[2] + " " +  testScores[3] + " " +  testScores[4]);
+            System.out.println(testsAverage);
+            System.out.println(Grade);
+        }
+}
