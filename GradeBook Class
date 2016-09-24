@@ -22,7 +22,7 @@ public class GradeBook{
         input = new Scanner(System.in);
         System.out.print("Please enter the student's name: ");
         name = input.nextLine();
-        System.out.print("Enter the 5 test scores: ");
+        System.out.print("Enter the 4 test scores: ");
         count = 0;
         //Attempt to full the tests array with the 5 scores
         do{
@@ -35,11 +35,11 @@ public class GradeBook{
             }catch(Exception e){//Catches OutOfBoundsException and InputNumberMismatchException
                 System.out.println("Please only use numbers between 0-100 for the tests");
                 input.nextLine();
-                System.out.println("Please re enter the 5 test scores");
+                System.out.println("Please re enter the 4 test scores");
             }
         }while (count <= 4);
         //Adds the new StudentRecord object to the records arraylist
-        records.add(new StudentRecord(name, tests[0], tests[1], tests[2], tests[3], tests[4]));
+        records.add(new StudentRecord(name, tests[0], tests[1], tests[2], tests[3]));
     }
     //Allows the printing of a record by Student Name
     public void printRecord(){
@@ -63,8 +63,7 @@ public class GradeBook{
             tests = records.get(count).getScores();
             System.out.println("Name: " + records.get(count).getName());
             System.out.println("Test1: " + df.format(records.get(count).getScores()[0]) + "\tTest2: " + df.format(records.get(count).getScores()[1]) + 
-                    "\tTest3: " + df.format(records.get(count).getScores()[2]) + "\tTest4: " + df.format(records.get(count).getScores()[3])
-                    + "\tTest5: " + df.format(records.get(count).getScores()[4]));
+                    "\tTest3: " + df.format(records.get(count).getScores()[2]) + "\tTest4: " + df.format(records.get(count).getScores()[3]));
             System.out.println("Average: " + df.format(records.get(count).getAverage())+ "%");
             System.out.println("Grade: " + records.get(count).getGrade());
             System.out.println("\n\n\n\n\n\n\n\n\n\n\n");
